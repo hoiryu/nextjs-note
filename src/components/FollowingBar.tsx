@@ -14,7 +14,7 @@ export default function FollowingBar() {
 	const users = data?.following && [...data?.following, ...data?.following, ...data?.following];
 
 	return (
-		<section className=' overflow-x-auto w-full flex justify-center items-center min-h[90px] p-4 mb-4 rounded-lg shadow-sm shadow-neutral-300'>
+		<section className='z-0 overflow-x-auto relative flex justify-center items-center w-full min-h[90px] p-4 mb-4 rounded-lg shadow-sm shadow-neutral-300'>
 			{loading ? <PacmanLoader size={8} color='red' /> : (!users || users.length === 0) && <p>{`You don't have following`}</p>}
 			{users && users.length > 0 && (
 				<ScrollableBar>

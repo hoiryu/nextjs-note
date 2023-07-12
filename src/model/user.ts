@@ -1,3 +1,7 @@
+import { client } from '@/service/sanity';
+import imageUrlBuilder from '@sanity/image-url';
+import { SanityImageSource } from '@sanity/image-url/lib/types/types';
+
 // Session 에서 얻을 수 있는 사용자에 대한 정보를 정의
 export type User = {
 	name: string;
@@ -14,3 +18,8 @@ export type DetailUser = User & {
 	followers: SimpleUser[];
 	bookmarks: string[];
 };
+
+const builder = imageUrlBuilder(client);
+export function urlFor(source: SanityImageSource) {
+	return builder.image(source).width(800).url();
+}

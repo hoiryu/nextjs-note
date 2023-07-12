@@ -1,7 +1,7 @@
-import { getUserByUsername } from '@/service/user';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { getFollowingPostsOf } from '@/service/posts';
 import { getServerSession } from 'next-auth';
 import { NextResponse } from 'next/server';
-import { authOptions } from '../auth/[...nextauth]/route';
 
 export async function GET() {
 	// 사용자가 보낸 request header 의 cookie 에 있는 Token 을 해석
@@ -11,6 +11,6 @@ export async function GET() {
 	const user = session?.user;
 	if (!user) return new Response('Authentication Error', { status: 401 });
 
-	return getUserByUsername(user.username) //
+	return getFollowingPostsOf(user.username) //
 		.then((data) => NextResponse.json(data));
 }
