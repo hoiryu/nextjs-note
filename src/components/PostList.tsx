@@ -1,12 +1,14 @@
 'use client';
 
-import { SimplePost } from '@/model/post';
-import useSWR from 'swr';
+import usePosts from '@/hooks/posts';
 import PostListCard from './PostListCard';
 import GridSpinner from './ui/GridSpinner';
 
 export default function PostList() {
-	const { data: posts, isLoading: loading } = useSWR<SimplePost[]>('/api/posts');
+	// 자체적으로 사용하는 것이 아니라 usePosts 사용
+	// const { data: posts, isLoading: loading } = useSWR<SimplePost[]>('/api/posts');
+	const { posts, isLoading: loading } = usePosts();
+
 	return (
 		<section>
 			{loading && (

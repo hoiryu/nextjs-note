@@ -1,4 +1,4 @@
-import { User } from '@/model/user';
+import { AuthUser } from '@/model/user';
 import 'next-auth';
 
 declare module 'next-auth' {
@@ -14,6 +14,6 @@ declare module 'next-auth' {
 
 	// /modal/user.ts 에서 type User 를 정의 했기 때문에 다시 지정
 	interface Session {
-		user: User;
+		user: AuthUser;
 	}
 }
