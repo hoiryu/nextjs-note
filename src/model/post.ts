@@ -1,7 +1,7 @@
 export type Comment = {
 	comment: string;
 	username: string;
-	image: string;
+	image?: string | undefined;
 };
 
 // 리스트에서 사용

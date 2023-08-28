@@ -1,8 +1,7 @@
-import { FullPost, SimplePost } from '@/model/post';
+import useFullPost from '@/hooks/post';
+import { SimplePost } from '@/model/post';
 import Image from 'next/image';
-import userSWR from 'swr';
 import ActionBar from './ActionBar';
-import CommentForm from './CommentForm';
 import PostUserAvatar from './PostUserAvatar';
 import Avatar from './ui/Avatar';
 
@@ -12,10 +11,9 @@ type Props = {
 
 export default function PostDetail({ post }: Props) {
 	// SimplePost 는 comment 정보를 갖고 있지 않다. 그렇기에 별도로 받아오는 API 통신 필요
-	const { id, userImage, username, image, createdAt, likes } = post;
-	const { data } = userSWR<FullPost>(`/api/posts/${id}`);
+	const { id, userImage, username, image } = post;
+	const { post: data, postComment } = useFullPost(id);
 	const comments = data?.comments;
-	const handlePostComment = (comment: string) => {};
 
 	return (
 		<section className='flex w-full h-full'>
@@ -36,8 +34,7 @@ export default function PostDetail({ post }: Props) {
 							</li>
 						))}
 				</ul>
-				<ActionBar post={post} />
-				<CommentForm onPostComment={handlePostComment} />
+				<ActionBar post={post} onComment={postComment} />
 			</div>
 		</section>
 	);
