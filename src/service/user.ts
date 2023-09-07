@@ -99,7 +99,6 @@ export async function removeBookmark(userId: string, postId: string) {
 }
 
 export async function follow(myId: string, targetId: string) {
-	// 두 가지 업데이트 하는 방법
 	return client
 		.transaction() //
 		.patch(myId, (user) => user.setIfMissing({ following: [] }).append('following', [{ _ref: targetId, _type: 'reference' }]))
