@@ -11,9 +11,9 @@ type Props = {
 	user: ProfileUser;
 };
 const tabs = [
-	{ type: 'posts', icon: <PostIcon /> },
-	{ type: 'saved', icon: <BookmarkIcon className='w-3 h-3' /> },
-	{ type: 'liked', icon: <HeartIcon className='w-3 h-3' /> },
+	{ type: 'posts', title: 'User posts', icon: <PostIcon /> },
+	{ type: 'saved', title: 'Saved posts', icon: <BookmarkIcon className='w-3 h-3' /> },
+	{ type: 'liked', title: 'liked posts', icon: <HeartIcon className='w-3 h-3' /> },
 ];
 export default function UserPosts({ user: { username } }: Props) {
 	// 탭에 따라 Parameter 를 다르게 넘겨서 API 요청 수행
@@ -25,9 +25,15 @@ export default function UserPosts({ user: { username } }: Props) {
 	return (
 		<section>
 			<ul className='flex justify-center uppercase'>
-				{tabs.map(({ type, icon }) => (
-					<li className={`mx-12 p-4 cursor-pointer border-black ${type === query && 'font-bold border-t'}`} key={type} onClick={() => setQuery(type)}>
-						<button className='scale-150 md:scale-100'>{icon}</button>
+				{tabs.map(({ type, icon, title }) => (
+					<li
+						className={`mx-12 p-4 cursor-pointer border-black ${type === query && 'font-bold border-t'}`}
+						key={type}
+						onClick={() => setQuery(type)}
+					>
+						<button className='scale-150 md:scale-100' aria-label={title}>
+							{icon}
+						</button>
 						<span className='hidden md:inline'>{type}</span>
 					</li>
 				))}
